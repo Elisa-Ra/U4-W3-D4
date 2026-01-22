@@ -31,7 +31,7 @@ public class Application {
         Persona persona = new Persona(
                 "Elisa",
                 "Raeli",
-                "elisa2@example.com",
+                "elisa4@example.com",
                 LocalDate.of(1997, 1, 1),
                 "F"
         );
@@ -44,6 +44,7 @@ public class Application {
         );
         locationDAO.save(location);
         EventiDAO eventidao = getEventiDAO(em, location);
+
 
         // Prendo un evento salvato per creare la partecipazione
         Evento evento = eventidao.findById(1); // Evento 1
@@ -118,42 +119,60 @@ public class Application {
     private static EventiDAO getEventiDAO(EntityManager em, Location location) {
         EventiDAO eventd = new EventiDAO(em);
 
-        Evento evento1 = new Evento(
-                "Evento 1",
-                LocalDate.of(2026, 1, 20),
-                "Descrizione dell'evento 1",
-                TipoEvento.PUBBLICO,
-                100,
-                location
-        );
+        // --- CREAZIONE EVENTI DI TEST ---
 
-        Evento evento2 = new Evento(
-                "Evento 2",
-                LocalDate.of(2026, 2, 14),
-                "Descrizione dell'evento 2",
-                TipoEvento.PRIVATO,
+        // Concerto
+        Concerto concerto = new Concerto(
+                "Concerto Rock",
+                LocalDate.of(2026, 3, 15),
+                "Concerto rock di prova",
+                TipoEvento.PUBBLICO,
+                5000,
+                location,
+                GenereConcerto.ROCK,
+                true
+        );
+        eventd.save(concerto);
+
+        // Partita di Calcio
+        PartitaDiCalcio partita = new PartitaDiCalcio(
+                "Derby Test",
+                LocalDate.of(2026, 4, 10),
+                "Partita di calcio di prova",
+                TipoEvento.PUBBLICO,
+                30000,
+                location,
+                "Palermo",
+                "Catania",
+                "Palermo",
                 2,
-                location
+                1
         );
+        eventd.save(partita);
 
-        Evento evento3 = new Evento(
-                "Evento 3",
-                LocalDate.of(2026, 12, 25),
-                "Descrizione dell'evento 3",
+        // Gara di Atletica
+        GaraDiAtletica gara = new GaraDiAtletica(
+                "100 metri",
+                LocalDate.of(2026, 6, 20),
+                "Gara di atletica di prova",
                 TipoEvento.PUBBLICO,
-                500,
-                location
+                8,
+                location,
+                Set.of(),   // nessun atleta per ora
+                null        // nessun vincitore per ora
         );
+        eventd.save(gara);
 
-        eventd.save(evento1);
-        eventd.save(evento2);
-        eventd.save(evento3);
+        // --- QUERY DI TEST ---
         System.out.println("Lista concerti in streaming:");
-        eventd.getConcertiInStreaming(true).forEach(c -> System.out.println(c.getTitolo()));
+        eventd.getConcertiInStreaming(true)
+                .forEach(c -> System.out.println(c.getTitolo()));
 
         System.out.println("Lista concerti Rock:");
-        eventd.getConcertiPerGenere(GenereConcerto.ROCK).forEach(c -> System.out.println(c.getTitolo()));
+        eventd.getConcertiPerGenere(GenereConcerto.ROCK)
+                .forEach(c -> System.out.println(c.getTitolo()));
 
         return eventd;
     }
+
 }

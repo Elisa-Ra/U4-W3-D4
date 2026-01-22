@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Table(name = "evento") // opzionale, serve per personalizzare il nome della tabella
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Evento {
+public abstract class Evento {
     @Id // Annotazione OBBLIGATORIA. Dichiaro che questo attributo corrisponderà alla primary key della tabella
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Annotazione OPZIONALE (consigliata).
     // Fa generare al DB i valori per la primary key

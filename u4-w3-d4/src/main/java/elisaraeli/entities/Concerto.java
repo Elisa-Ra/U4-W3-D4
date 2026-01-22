@@ -29,4 +29,20 @@ public class Concerto extends Evento {
     }
 
     // Getters e setters
+
+    public GenereConcerto getGenere() {
+        return genere;
+    }
+
+    public void setGenere(GenereConcerto genere) {
+        this.genere = genere;
+    }
+
+    public boolean isInStreaming() {
+        return inStreaming;
+    }
+
+    public void setInStreaming(boolean inStreaming) {
+        this.inStreaming = inStreaming;
+    }
 }
