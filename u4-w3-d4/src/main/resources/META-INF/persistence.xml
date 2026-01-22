@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.2"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+    <!-- Il nome della Persistence Unit è importante perché nel codice Java dovremo richiamarla per nome-->
+    <persistence-unit name="w3d4pu">
+
+        <!-- Aggiungere elenco delle entities -->
+        <class>elisaraeli.entities.Evento</class>
+        <class>elisaraeli.entities.TipoEvento</class>
+        <class>elisaraeli.entities.Location</class>
+        <class>elisaraeli.entities.Partecipazione</class>
+        <class>elisaraeli.entities.StatoPartecipazione</class>
+        <class>elisaraeli.entities.Persona</class>
+        <class>elisaraeli.entities.Concerto</class>
+        <class>elisaraeli.entities.GaraDiAtletica</class>
+        <class>elisaraeli.entities.GenereConcerto</class>
+        <class>elisaraeli.entities.PartitaDiCalcio</class>
+
+
+        <properties>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/w3d4"/>
+            <!--  w3d4 è il nome del DB (se questo non è già stato creato in PgAdmin avrò un errore-->
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value="1234"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <!--  Quest'ultima impostazione servirà per far creare/aggiornare le tabelle in automatico all'avvio dell'applicazione-->
+        </properties>
+    </persistence-unit>
+</persistence>
